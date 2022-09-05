@@ -5,6 +5,8 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
+# UserMixIn implements a few default methods required by flask
+# To make sure user is active and logged
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)

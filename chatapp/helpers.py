@@ -9,13 +9,14 @@ from flask import session, flash
 
 def add_user(name, phone):
     new_user = User(name=name, phone=phone)
-    new_user.active = False
     db.session.add(new_user)
     db.session.commit()
 
     return new_user
 
 
+# Send a message using twilio library
+# Uses twilio free development number
 def send_message(phone):
     pin = "{:0>4}".format(secrets.randbelow(10 ** 4))
 
@@ -38,6 +39,7 @@ def send_message(phone):
         else:
             raise e
 
+    # Store pin in sessions to use it in verify
     session["pin"] = pin
     return True
 
