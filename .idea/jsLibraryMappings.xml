@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{75f6183458db8c453306f93521e93d37, @popperjs/core, bootstrap, bootstrap-icons, intl-tel-input, socket.io}" />
+  </component>
+</project>

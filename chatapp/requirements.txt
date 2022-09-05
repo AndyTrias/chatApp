@@ -1,0 +1,7 @@
+Flask
+Flask_Session
+Flask_Login
+Flask_sqlalchemy
+FLask_socketio
+eventlet
+Twilio

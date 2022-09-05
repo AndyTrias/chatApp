@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Verify
+{% endblock %}
+
+{% block main %}
+    <h2>Enter verification code</h2>
+    <form method = "post">
+            <div class="mb-4">
+                <input class = "form-control mx-auto w-auto" type = "text" autofocus autocomplete="n" placeholder = "Pin" name = "pin" pattern="[0-9]+"  required>
+            </div>
+            <button type = "submit" class = "btn btn-success ">Verify</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <!-- Get Country and Dial Codes !-->
+    <!-- Thanks to : https://github.com/jackocnr/intl-tel-input/tags-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/css/intlTelInput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/js/intlTelInput.min.js"></script>
+
+    <script type="text/javascript" src="{{url_for('static', filename='phones.js')}}"></script>
+
+
+    <form method = "post" class = "mt-auto shadow w-50 mx-auto" style = "background-color: #e3f2fd;">
+        <div class="mb-4">
+            <input class = "form-control mx-auto w-auto" type = "tel"  placeholder = "Phone number" name = "phone" id = "phone"
+             pattern="[0-9]{8,13}"  required>
+            <div class = "form-text">We will never share your phone to anyone</div>
+        </div>
+
+        {% block form %}{% endblock %}
+    </form>
+{% endblock %}
