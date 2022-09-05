@@ -7,7 +7,6 @@ from twilio.base import exceptions
 from flask import session, flash
 
 
-# Returns user_id to store in session
 def add_user(name, phone):
     new_user = User(name=name, phone=phone)
     new_user.active = False
@@ -15,11 +14,6 @@ def add_user(name, phone):
     db.session.commit()
 
     return new_user
-
-
-def delete_user(user):
-    db.session.delete(user)
-    db.session.commit()
 
 
 def send_message(phone):
