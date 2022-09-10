@@ -1,0 +1,17 @@
+{% extends "layoutLog.html" %}
+
+{% block title %}
+    Add Contact
+{% endblock %}
+
+<h2>Add a Contact</h2>
+
+{% block form %}
+        <div class = "form-group mb-4">
+        <input type="text" class="form-control mx-auto w-auto" placeholder="Name of your contact" name = "name"  required>
+        </div>
+
+        <button type="submit" class="btn btn-info">Add contact</button>
+{% endblock %}
+
+

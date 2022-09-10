@@ -1,7 +1,7 @@
 import secrets
 import os
 from . import db
-from .models import User
+from .models import User, Contacts
 from twilio.rest import Client
 from twilio.base import exceptions
 from flask import session, flash
@@ -13,6 +13,15 @@ def add_user(name, phone):
     db.session.commit()
 
     return new_user
+
+
+def add_contact(contact_name, phone, user):
+    contact_id = User.query.filter_by(phone=phone).first().id
+    new_contact = Contacts(name=contact_name, contact_id=contact_id, user_id=user)
+    db.session.add(new_contact)
+    db.session.commit()
+
+    return new_contact
 
 
 # Send a message using twilio library
