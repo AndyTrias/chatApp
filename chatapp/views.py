@@ -10,9 +10,65 @@ views = Blueprint("views", __name__)
 
 
 @views.route("/")
-@login_required
+@login_required 
 def index():
-    return render_template("index.html", user=current_user)
+    a = {}
+    b = {}
+
+    b = {
+        "id" : 2,
+        "name" : "Jane",
+        "phone" : "0987654321",
+        "created" : "2021-01-01 00:00:00",
+        "chats" : [
+            {
+                "id" : 1,
+                "chatWith" : a,
+                "messages" : [
+                    {
+                        "id" : 1,
+                        "content" : "Hello",
+                        "sentBy" : a,
+                        "sentTo" : b,
+                        "sentAt" : "2021-01-01 00:00:00"
+                    }
+                ]
+            }
+        ],
+        "contacts" : [ a ]
+    }
+
+    a = {
+        "id" : 1,
+        "name" : "John",
+        "phone" : "1234567890",
+        "created" : "2021-01-01 00:00:00",
+        "chats" : [
+            {
+                "id" : 1,
+                "chatWith" : b,
+                "messages" : [
+                    {
+                        "id" : 1,
+                        "content" : "Hello",
+                        "sentBy" : a,
+                        "sentTo" : b,
+                        "sentAt" : "2021-01-01 00:00:00"
+                    },
+                    {
+                        "id" : 2,
+                        "content" : "Hi",
+                        "sentBy" : b,
+                        "sentTo" : a,
+                        "sentAt" : "2021-01-01 00:00:00"
+                    }
+                ]
+            }
+        ],
+        "contacts" : [ b, b, b ]
+    }
+    
+    return render_template("index.html", user=a) 
 
 
 @views.route("/log", methods=["GET", "POST"])
