@@ -1,9 +1,10 @@
 from flask import Blueprint, flash, render_template, redirect, request, session, url_for
-from flask_login import login_required,  login_user, logout_user, current_user
+from flask_login import login_required, login_user, logout_user, current_user
 from chatapp.models import User, Contacts
-from chatapp.helpers import send_message, add_user, add_contact
+from chatapp.helpers import send_message, add_user, add_contact, get_user, delete_user
 
 views = Blueprint("views", __name__)
+
 
 # Login required redirects to register
 
@@ -18,16 +19,18 @@ def index():
 def log():
     if request.method == "POST":
         phone = request.form.get("phone")
-        user = User.query.filter_by(phone=phone).first()
+        user = get_user(phone)
 
-        if user is None:
-            flash("No user found with this phone", "error")
-
-        # Store id in sessions to avoid wrong redirections to verify
-        else:
+        if user:
+            # Check if phone was valid for messages
             if send_message(phone):
+
+                # Store id in sessions to avoid wrong redirections to verify
                 session["id"] = user.id
                 return redirect(url_for("views.verify"))
+
+        else:
+            flash("No user found with this phone or it was unable to send a message", "error")
 
     return render_template("log.html", user=current_user)
 
@@ -39,7 +42,7 @@ def register():
         name = request.form.get("name")
 
         # Phone must be unique
-        if User.query.filter_by(phone=phone).first():
+        if get_user(phone):
             flash("Phone already registered. Please log in", "error")
             return redirect(url_for("views.log"))
 
@@ -55,7 +58,6 @@ def register():
 
 @views.route("/verify", methods=["GET", "POST"])
 def verify():
-
     # Make sure user has been correctly redirected
     # If not redirect to register
     if session.get("id"):
@@ -98,10 +100,11 @@ def add_contacts():
         # TODO make javascript detect the form
         phone = "+1" + request.form.get("phone")
         name = request.form.get("name")
+        contact_user = get_user(phone)
 
-        contact_user = User.query.filter_by(phone=phone).first()
-
-        if contact_user is not None:
+        # Check if user exists
+        # Check if user is not already a contact
+        if contact_user:
             if Contacts.query.filter_by(user_id=current_user.id, contact_id=contact_user.id).first():
                 flash("User is already a contact", "error")
 
@@ -112,3 +115,16 @@ def add_contacts():
             flash("No user found with this phone", "error")
 
     return render_template("addContact.html")
+
+
+@views.route("/delete", methods=["GET", "POST"])
+@login_required
+def delete():
+    if request.method == "POST":
+        contact_id = request.form.get("contact")
+        contact = Contacts.query.get(contact_id)
+
+        if contact:
+            delete_user(contact)
+
+    return render_template("delete.html", contacts=Contacts.query.filter_by(user_id=current_user.id).all())

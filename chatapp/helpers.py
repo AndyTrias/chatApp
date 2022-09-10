@@ -24,6 +24,15 @@ def add_contact(contact_name, phone, user):
     return new_contact
 
 
+def get_user(phone):
+    return User.query.filter_by(phone=phone).first()
+
+
+def delete_user(user):
+    db.session.delete(user)
+    db.session.commit()
+
+
 # Send a message using twilio library
 # Uses twilio free development number
 def send_message(phone):
