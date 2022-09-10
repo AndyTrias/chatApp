@@ -12,8 +12,14 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String, nullable=False)
     phone = db.Column(db.String, nullable=False, unique=True)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    contacts = db.relationship("Contacts", backref="user", lazy=True)
 
 
+class Contacts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    name = db.Column(db.String, nullable=False)
+    contact_id = db.Column(db.Integer, nullable=False)
 
 
 

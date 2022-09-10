@@ -1,9 +1,9 @@
 let socket = io();
 socket.on('connect', function() {
-        socket.emit("message", "hello");
+        socket.emit("evento", "hello");
     });
 
-socket.addEventListener("message", function (msg){
-    console.log(msg);
+socket.addEventListener("mensaje", function (msg){
+    alert(msg);
 
 })
