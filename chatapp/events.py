@@ -2,8 +2,8 @@ from . import socketio
 from flask_socketio import emit
 
 
-@socketio.on('evento')
+@socketio.on('mensaje')
 def handle_message(msg):
-    print('Message: ' + msg)
-    emit('mensaje', 'holaaa')
-
+    # TODO - Save message to database
+    # TODO - Send message to all users
+    pass        

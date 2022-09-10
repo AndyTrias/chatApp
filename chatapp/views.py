@@ -68,7 +68,7 @@ def index():
         "contacts" : [ b, b, b ]
     }
     
-    return render_template("index.html", user=a) 
+    return render_template("index.html", user=current_user) 
 
 
 @views.route("/log", methods=["GET", "POST"])
@@ -152,9 +152,7 @@ def logout():
 @login_required
 def add_contacts():
     if request.method == "POST":
-
-        # TODO make javascript detect the form
-        phone = "+1" + request.form.get("phone")
+        phone = request.form.get("phone")
         name = request.form.get("name")
         contact_user = get_user(phone)
 
