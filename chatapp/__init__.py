@@ -20,7 +20,7 @@ socketio = SocketIO()
 def create_app(debug=True):
 
     # Need to use sessions and sqlalchemy
-    app.config["SECRET_KEY"] = "kajksdhaskdjhasdk"
+    app.config["SECRET_KEY"] = os.environ["FLASK_SECRET_KEY"]
     app.config["SESSION_TYPE"] = "filesystem"
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

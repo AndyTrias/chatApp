@@ -38,14 +38,14 @@ def delete_user(user):
 def send_message(phone):
     pin = "{:0>4}".format(secrets.randbelow(10 ** 4))
 
-    account_sid = "AC71bf099f34730d1bc30f878d5ff5e277"
-    auth_token = "945013d87ace01e9ccb5c604ea419e1c"
+    account_sid = os.environ["TWILIO_ACCOUNT_SID"]
+    auth_token = os.environ["TWILIO_AUTH_TOKEN"]
     client = Client(account_sid, auth_token)
 
     try:
         message = client.messages.create(
                                         body=f"your verification code is {pin}",
-                                        from_="3854832060",
+                                        from_=os.environ["TWILIO_PHONE_NUMBER"],
                                         to=phone
                                         )
     except exceptions.TwilioRestException as e:
