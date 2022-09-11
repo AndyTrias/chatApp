@@ -6,4 +6,5 @@ from flask_socketio import emit
 def handle_message(msg):
     # TODO - Save message to database
     # TODO - Send message to all users
-    pass        
+
+    print(msg)
