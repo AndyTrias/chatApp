@@ -11,5 +11,4 @@ document.addEventListener("DOMContentLoaded", function (){
         form.querySelector("#phone").value = phoneInput.getNumber();
         form.submit();
     })
-
 })

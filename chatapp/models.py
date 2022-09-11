@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.String, nullable=False, unique=True)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     contacts = db.relationship("Contacts", backref="user", lazy=True)
+    chats = db.relationship("Chat", backref="user", lazy=True)
 
 
 class Contacts(db.Model):
@@ -21,5 +22,16 @@ class Contacts(db.Model):
     name = db.Column(db.String, nullable=False)
     contact_id = db.Column(db.Integer, nullable=False)
 
+class Chat(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    chatWith = db.Column(db.Integer, db.ForeignKey("user.id"))
+    messages = db.relationship("Message", backref="chat", lazy=True)
 
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String, nullable=False)
+    sentBy = db.Column(db.Integer, db.ForeignKey("user.id"))
+    sentTo = db.Column(db.Integer, db.ForeignKey("user.id"))
+    sentAt = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    chat_id = db.Column(db.Integer, db.ForeignKey("chat.id"))
 

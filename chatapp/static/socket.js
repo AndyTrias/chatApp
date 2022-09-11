@@ -4,6 +4,15 @@ socket.on('connect', function() {
     });
 
 socket.addEventListener("mensaje", function (msg){
-    alert(msg);
+    //alert(msg);
+
+})
+
+document.addEventListener("DOMContentLoaded", function (){
+
+    document.querySelector(".enviar").addEventListener("click", function(){
+        let message = document.querySelector("#mensaje").value;
+        socket.emit("mensaje", message);
+    })
 
 })
