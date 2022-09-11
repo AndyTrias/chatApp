@@ -16,12 +16,13 @@
 {#    <link rel="icon" href="https://www.w3.org/2000/svg">#}
     
     <script src="https://kit.fontawesome.com/e2a2fac99f.js" crossorigin="anonymous"></script>
+    <link src="../static/styles.css" rel="stylesheet">
 
    <title> {% block title %}{% endblock %}</title>
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-sm navbar-light" style = "background-color: #e3f2fd;">
+<body class="bg-info">
+    <nav class="navbar navbar-expand navbar-light" style = "background-color: #e3f2fd;">
             <div class = "container-fluid">
                 <a href="/" class="btn btn-primary" style="margin-right:25px;"><i class="fa-solid fa-house"></i></a>
                 {# Different navbar based if user is logged in #}
@@ -40,7 +41,7 @@
 
                 <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class = "nav-link" href = "/logout">Log Out</a>
+                            <a class = "btn btn-danger" href = "/logout">Log Out</a>
                         </li>
                     </ul>
 
