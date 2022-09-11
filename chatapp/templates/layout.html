@@ -14,7 +14,8 @@
 
     <!-- Set title -->
 {#    <link rel="icon" href="https://www.w3.org/2000/svg">#}
-
+    
+    <script src="https://kit.fontawesome.com/e2a2fac99f.js" crossorigin="anonymous"></script>
 
    <title> {% block title %}{% endblock %}</title>
 </head>
@@ -22,14 +23,10 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-light" style = "background-color: #e3f2fd;">
             <div class = "container-fluid">
-
-{#               Different navbar based if user is logged in#}
+                <a href="/" class="btn btn-primary" style="margin-right:25px;"><i class="fa-solid fa-house"></i></a>
+                {# Different navbar based if user is logged in #}
                 {% if current_user.is_authenticated  %}
-                <form class = "d-flex">
-                    <label>
-                        <input class = "form-control me-1 bg-light" autocomplete="off" type = "text" name = "search" placeholder="Search">
-                    </label>
-                </form>
+                
 
                 <ul class = "navbar-nav me-auto">
                     <li class = "nav-item dropdown">
