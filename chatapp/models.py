@@ -22,10 +22,12 @@ class Contacts(db.Model):
     name = db.Column(db.String, nullable=False)
     contact_id = db.Column(db.Integer, nullable=False)
 
+
 class Chat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     chatWith = db.Column(db.Integer, db.ForeignKey("user.id"))
     messages = db.relationship("Message", backref="chat", lazy=True)
+
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)

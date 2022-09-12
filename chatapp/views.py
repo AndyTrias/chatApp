@@ -1,4 +1,3 @@
-import socket
 from flask import Blueprint, flash, render_template, redirect, request, session, url_for,jsonify
 from flask_login import login_required, login_user, logout_user, current_user
 from chatapp.models import User, Contacts
@@ -8,63 +7,6 @@ views = Blueprint("views", __name__)
 
 
 # Login required redirects to register
-
-
-a = {}
-b = {}
-
-b = {
-    "id" : 2,
-    "name" : "Jane",
-    "phone" : "0987654321",
-    "created" : "2021-01-01 00:00:00",
-    "chats" : [
-        {
-            "id" : 1,
-            "chatWith" : a,
-            "messages" : [
-                {
-                    "id" : 1,
-                    "content" : "Hello",
-                    "sentBy" : a,
-                    "sentTo" : b,
-                    "sentAt" : "2021-01-01 00:00:00"
-                }
-            ]
-        }
-    ],
-    "contacts" : [ a ]
-}
-
-a = {
-    "id" : 1,
-    "name" : "John",
-    "phone" : "1234567890",
-    "created" : "2021-01-01 00:00:00",
-    "chats" : [
-        {
-            "id" : 1,
-            "chatWith" : b,
-            "messages" : [
-                {
-                    "id" : 1,
-                    "content" : "Hello",
-                    "sentBy" : a,
-                    "sentTo" : b,
-                    "sentAt" : "2021-01-01 00:00:00"
-                },
-                {
-                    "id" : 2,
-                    "content" : "Hi",
-                    "sentBy" : b,
-                    "sentTo" : a,
-                    "sentAt" : "2021-01-01 00:00:00"
-                }
-            ]
-        }
-    ],
-    "contacts" : [ b, b, b ]
-}
 @views.route("/")
 @login_required 
 def index():
@@ -76,6 +18,7 @@ def index():
 def chat():
     contact = request.form.get("contact")
     return render_template('chat.html', contact=contact, user=current_user)
+
 
 @views.route("/log", methods=["GET", "POST"])
 def log():
