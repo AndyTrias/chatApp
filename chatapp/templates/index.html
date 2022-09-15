@@ -5,23 +5,14 @@
 {% endblock %}
 
 {% block main %}
-
-
-    
         <div class="container py-5">
-      
           <div class="row">
             <div class="col-md-12">
-      
               <div class="card" id="chat3" style="border-radius: 15px;">
                 <div class="card-body">
-      
                   <div class="row">
-
                     <div class="">
-      
                       <div class="p-3">
-      
                         <div class="input-group rounded mb-3">
                             <input class = "form-control me-1 bg-light" autocomplete="off" type = "text" name = "search" placeholder="Search">
                           <span class="input-group-text border-0" id="search-addon">
@@ -31,6 +22,8 @@
       
                         <div data-mdb-perfect-scrollbar="true">
                             <ul class="list-unstyled mb-0">
+
+{#                              Loop through all contacts#}
                                 {% for contact in user.contacts %}
                                     <li class="p-2 border-bottom">
                                         <a href="/chat" class="d-flex justify-content-between contact"> 
@@ -40,7 +33,15 @@
                                                     <span class="badge bg-success badge-dot"></span>
                                                 </div>
                                                 <div class="pt-1">
-                                                    <p class="fw-bold mb-0"><form action="/chat" method="post"> <input type="hidden" name="contact" value="{{contact}}"> <button type="submit" class="btn text-dark">{{contact.name}}</button></form></p>
+
+{#                                                  Contact Value#}
+                                                    <p class="fw-bold mb-0">
+                                                        <form action="/chat" method="post">
+                                                            <input type="hidden" name="contact" value="{{contact.id}}">
+                                                            <button type="submit" class="btn text-dark">{{contact.name}}</button>
+                                                        </form>
+                                                    </p>
+
                                                     <p class="small text-muted">
 {#                                                      {% for chat in user.chats %}#}
 {#                                                      {% if chat.chatWith.id == contact.id %}#}
@@ -65,24 +66,13 @@
                                 {% endfor %}
                             </ul>   
                         </div>
-      
                       </div>
-      
                     </div>
-
                   </div>
-      
                 </div>
               </div>
-      
             </div>
           </div>
-      
         </div>
-
-
-
-      
-
 {% endblock %}
 

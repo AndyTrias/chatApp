@@ -11,9 +11,14 @@ document.addEventListener("DOMContentLoaded", function (){
     document.querySelector("#sendmsg").addEventListener("click", function(){
         addMessage(input.value, "start");
 
-        // Clear input and send message
-        socket.emit("chatMessage", input.value);
+
+       // Clear input and send message
+        let data  = { "message": input.value,
+                  "receiver": myContact};
+
+        socket.emit("chatMessage", data);
         input.value = ""
+
     })
 
     socket.addEventListener("message", function (msg) {

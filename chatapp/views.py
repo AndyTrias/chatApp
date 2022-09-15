@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, render_template, redirect, request, session, url_for,jsonify
 from flask_login import login_required, login_user, logout_user, current_user
-from chatapp.models import User, Contacts
+from chatapp.models import User, Contact
 from chatapp.helpers import send_message, add_user, add_contact, get_user, delete_user
 
 views = Blueprint("views", __name__)
@@ -16,8 +16,48 @@ def index():
 @views.route("/chat", methods=["GET", "POST"])
 @login_required
 def chat():
-    contact = request.form.get("contact")
-    return render_template('chat.html', contact=contact, user=current_user)
+    contact_id = request.form.get("contact")
+    contact = Contact.query.get(contact_id)
+
+    if contact:
+        return render_template('chat.html', contact=contact, user=current_user)
+
+
+@views.route("/contacts", methods=["GET", "POST"])
+@login_required
+def add_contacts():
+    if request.method == "POST":
+        phone = request.form.get("phone")
+        name = request.form.get("name")
+        contact_user = get_user(phone)
+
+        # Check if user exists
+        # Check if user is not already a contact
+        if contact_user:
+            if Contact.query.filter_by(user_id=current_user.id, contact_id=contact_user.id).first():
+                flash("User is already a contact", "error")
+
+            else:
+                add_contact(user=current_user.id, phone=phone, contact_name=name)
+
+        else:
+            flash("No user found with this phone", "error")
+
+    return render_template("addContact.html")
+
+
+@views.route("/delete", methods=["GET", "POST"])
+@login_required
+def delete():
+    if request.method == "POST":
+        contact_id = request.form.get("contact")
+        contact = Contact.query.get(contact_id)
+
+
+        if contact:
+            delete_user(contact)
+
+    return render_template("delete.html", contacts=Contact.query.filter_by(user_id=current_user.id).all())
 
 
 @views.route("/log", methods=["GET", "POST"])
@@ -97,37 +137,4 @@ def logout():
     return redirect(url_for("views.log"))
 
 
-@views.route("/contacts", methods=["GET", "POST"])
-@login_required
-def add_contacts():
-    if request.method == "POST":
-        phone = request.form.get("phone")
-        name = request.form.get("name")
-        contact_user = get_user(phone)
 
-        # Check if user exists
-        # Check if user is not already a contact
-        if contact_user:
-            if Contacts.query.filter_by(user_id=current_user.id, contact_id=contact_user.id).first():
-                flash("User is already a contact", "error")
-
-            else:
-                add_contact(user=current_user.id, phone=phone, contact_name=name)
-
-        else:
-            flash("No user found with this phone", "error")
-
-    return render_template("addContact.html")
-
-
-@views.route("/delete", methods=["GET", "POST"])
-@login_required
-def delete():
-    if request.method == "POST":
-        contact_id = request.form.get("contact")
-        contact = Contacts.query.get(contact_id)
-
-        if contact:
-            delete_user(contact)
-
-    return render_template("delete.html", contacts=Contacts.query.filter_by(user_id=current_user.id).all())

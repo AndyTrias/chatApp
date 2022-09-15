@@ -1,10 +1,45 @@
 import secrets
 import os
 from . import db
-from .models import User, Contacts
+from .models import User, Contact, Message
 from twilio.rest import Client
 from twilio.base import exceptions
 from flask import session, flash
+
+
+# def add_chat(user, contact):
+#     chat = get_chat(user, contact)
+#
+#     if not chat:
+#         new_chat = Chat(user_id=user, contact_id=contact)
+#         db.session.add(new_chat)
+#         db.session.commit()
+#         return new_chat
+#
+#     return chat
+#
+#
+# def get_chat(userA, userB):
+#     chat = Chat.query.filter_by(user1=userA.id, user2=userB.id).first()
+#
+#     # Returns chat if exists
+#     if chat:
+#         return chat
+#
+#     # Returns none if it does not exist
+#     return Chat.query.filter_by(user1=userB.id, user2=userA.id).first()
+
+
+def add_message(message, sender, receiver):
+    new_message = Message(content=message, sentBy=sender.id, sentTo=receiver.id)
+    db.session.add(new_message)
+    db.session.commit()
+
+    return new_message
+
+
+def get_messages(chat):
+    return Message.query.filter_by(chat_id=chat.id).all()
 
 
 def add_user(name, phone):
@@ -17,7 +52,7 @@ def add_user(name, phone):
 
 def add_contact(contact_name, phone, user):
     contact_id = User.query.filter_by(phone=phone).first().id
-    new_contact = Contacts(name=contact_name, contact_id=contact_id, user_id=user)
+    new_contact = Contact(name=contact_name, contact_id=contact_id, user_id=user)
     db.session.add(new_contact)
     db.session.commit()
 
