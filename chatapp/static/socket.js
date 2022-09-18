@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function (){
 
        // Clear input and send message
         let data  = { "message": input.value,
-                  "receiver": myContact};
+                    "receiver": myContact};
 
         socket.emit("chatMessage", data);
         input.value = ""

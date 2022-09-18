@@ -1,6 +1,6 @@
-from flask import Blueprint, flash, render_template, redirect, request, session, url_for,jsonify
+from flask import Blueprint, flash, render_template, redirect, request, session, url_for, jsonify
 from flask_login import login_required, login_user, logout_user, current_user
-from chatapp.models import User, Contact
+from chatapp.models import User, Contact, Message, MessageRecipient
 from chatapp.helpers import send_message, add_user, add_contact, get_user, delete_user
 
 views = Blueprint("views", __name__)
@@ -8,9 +8,9 @@ views = Blueprint("views", __name__)
 
 # Login required redirects to register
 @views.route("/")
-@login_required 
+@login_required
 def index():
-    return render_template("index.html", user=current_user) 
+    return render_template("index.html", user=current_user)
 
 
 @views.route("/chat", methods=["GET", "POST"])
@@ -18,9 +18,14 @@ def index():
 def chat():
     contact_id = request.form.get("contact")
     contact = Contact.query.get(contact_id)
+    # TODO: create this sql query to flask and pass it to html
+    # SELECT content FROM message WHERE sender_id = current_user.id OR id = (SELECT message_id FROM message_recipient WHERE receiver_id = current_user.id);
+    messages = Message.query.filter((Message.sender_id == current_user.id))
+    received = map(lambda msg: msg.message_id, MessageRecipient.query.filter_by(receiver_id=current_user.id).all())
+    for msg_id in received:
+        messages = messages.union(Message.query.filter_by(id=msg_id))
 
-    if contact:
-        return render_template('chat.html', contact=contact, user=current_user)
+    return render_template('chat.html', contact=contact, user=current_user, messages=messages)
 
 
 @views.route("/contacts", methods=["GET", "POST"])
@@ -53,7 +58,6 @@ def delete():
         contact_id = request.form.get("contact")
         contact = Contact.query.get(contact_id)
 
-
         if contact:
             delete_user(contact)
 
@@ -69,7 +73,6 @@ def log():
         if user:
             # Check if phone was valid for messages
             if send_message(phone):
-
                 # Store id in sessions to avoid wrong redirections to verify
                 session["id"] = user.id
                 return redirect(url_for("views.verify"))
@@ -135,6 +138,3 @@ def verify():
 def logout():
     logout_user()
     return redirect(url_for("views.log"))
-
-
-
