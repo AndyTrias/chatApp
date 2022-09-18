@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function (){
 
 
        // Clear input and send message
+        // Send contact to server to upload to database
         let data  = { "message": input.value,
                     "receiver": myContact};
 
@@ -26,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function (){
     });
 });
 
- function addMessage(msg, position) {
+// Abstraction to avoid coid repetition
+function addMessage(msg, position) {
         let mainDiv = document.querySelector("#chats");
 
         // First Div

@@ -5,6 +5,9 @@ from .models import User
 from .helpers import add_message
 
 
+# Receive message from client
+# Send message to proper client
+# Update db
 @socketio.on('chatMessage')
 def handle_message(data):
     data = dict(data)
