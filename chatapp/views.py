@@ -18,16 +18,23 @@ def index():
 def chat():
     contact_id = request.form.get("contact")
     contact = Contact.query.get(contact_id)
-    # Tried to replicate following sql query
-    # SELECT content FROM message WHERE
-    # sender_id = current_user.id OR id = (SELECT message_id FROM message_recipient WHERE receiver_id = current_user.id)
-    messages = Message.query.filter((Message.sender_id == current_user.id))
-    received = map(lambda msg: msg.message_id, MessageRecipient.query.filter_by(receiver_id=current_user.id).all())
-    for msg_id in received:
-        messages = messages.union(Message.query.filter_by(id=msg_id))
 
-    # Send to client contact, user and messages
-    return render_template('chat.html', contact=contact, user=current_user, messages=messages)
+    if contact:
+        # Tried to replicate the following sql query
+        # SELECT content FROM message WHERE
+        # sender_id = current_user.id OR id =
+        # (SELECT message_id FROM message_recipient WHERE receiver_id = current_user.id)
+
+        messages = Message.query.filter((Message.sender_id == current_user.id))
+        received = map(lambda msg: msg.message_id, MessageRecipient.query.filter_by(receiver_id=current_user.id).all())
+        for msg_id in received:
+            messages = messages.union(Message.query.filter_by(id=msg_id))
+
+        # Send to client contact, user and messages
+        return render_template('chat.html', contact=contact, user=current_user, messages=messages)
+
+    flash("Contact not found", "error")
+    return redirect(url_for("views.index"))
 
 
 @views.route("/contacts", methods=["GET", "POST"])
@@ -62,6 +69,9 @@ def delete():
 
         if contact:
             delete_user(contact)
+
+        else:
+            flash("Contact not found", "error")
 
     return render_template("delete.html", contacts=Contact.query.filter_by(user_id=current_user.id).all())
 

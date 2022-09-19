@@ -10,7 +10,7 @@
                 <div class="pt-3 pe-3" data-mdb-perfect-scrollbar="true">
                     <div id = "chats">
                         {% for message in messages %}
-{#                            Messages sent from user                            #}
+{#                          Messages sent from user                            #}
                             {% if message.sender_id == current_user.id %}
                                 <div class="d-flex flex-row justify-content-start">
         {#                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"#}
@@ -22,7 +22,7 @@
                                 </div>
 
                             {% else %}
-{#                                Messages sent from contact to user#}
+{#                              Messages sent from contact to user#}
                                 <div class="d-flex flex-row justify-content-end">
                                     <div>
                                         <p class="small p-2 me-3 mb-1 rounded-3" style="background-color: blue;">{{message.content}}</p>
