@@ -69,6 +69,7 @@ def send_message(phone):
         if "HTTP 400" in str(e):
             print(phone, str(e))
             flash("Invalid number. Try again", "error")
+            flash("Remember phone number must be verified in Twilio", "error")
             return False
 
         else:
@@ -77,4 +78,3 @@ def send_message(phone):
     # Store pin in sessions to use it in verify
     session["pin"] = pin
     return True
-

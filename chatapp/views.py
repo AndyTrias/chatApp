@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, redirect, request, session, url_for, jsonify
+from flask import Blueprint, flash, render_template, redirect, request, session, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 from chatapp.models import User, Contact, Message, MessageRecipient
 from chatapp.helpers import send_message, add_user, add_contact, get_user, delete_user

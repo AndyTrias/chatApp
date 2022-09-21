@@ -13,8 +13,3 @@ def handle_message(data):
     data = dict(data)
     add_message(message=data['message'], sender=current_user, receiver=User.query.get(data['receiver']))
     emit("message", data["message"], broadcast=True, include_self=False)
-
-
-
-
-
