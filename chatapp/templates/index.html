@@ -20,7 +20,7 @@
             <li class="lista d-flex justify-content-between align-content-center">
               <div class="d-flex flex-row">
                 <img src="../static/images/default.png" width="40" />
-                <div class="ml-2 d-flex align-items-center">
+                <div class="ml-2 d-flex align-items-center ">
                   <form action="/chat" method="post">
                     <input type="hidden" name="contact" value="{{contact.id}}">
                     <button type="submit" class="btn text-dark">{{contact.name}}</button>
@@ -31,8 +31,8 @@
             {% endfor %}
           </ul>
           <div id="mySidenav" class="sidenav">
-            <a href="/contacts" id="add">Add</a>
-            <a href="/delete" id="delete">Delete</a>
+            <a href="/contacts" id="add"><i class="fas fa-add"></i></a>
+            <a href="/delete" id="delete"><i class="fas fa-trash"></i></a>
           </div>
           </div>
 {% endblock %}
