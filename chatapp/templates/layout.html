@@ -22,13 +22,13 @@
 <body>
     <nav class="navbar navbar-expand navbar-light">
             <div class = "container-fluid">
-                <a href="/" class="btn btn-primary" style="margin-right:25px;"><i class="fa-solid fa-house"></i></a>
+                <a href="/" class="btn btn-primary home" ><i class="fas fa-house"></i></a>
                 {# Different navbar based if user is logged in #}
                 {% if current_user.is_authenticated  %} 
 
                 <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class = "btn btn-danger" href = "/logout">Log Out</a>
+                            <a class = "btn btn-danger logout" href = "/logout" style="padding:10px;">Log Out</a>
                         </li>
                     </ul>
 

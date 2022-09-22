@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function (){
 
 // Abstraction to avoid coid repetition
 function addMessage(msg, position) {
-        let mainDiv = document.querySelector("#chats");
+        let mainDiv = document.querySelector(".chat");
 
         // First Div
         let d = document.createElement("div");

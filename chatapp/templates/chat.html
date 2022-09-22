@@ -4,46 +4,49 @@
 <script type="text/javascript">let myContact = {{contact.contact_id }};</script>
 <script type="text/javascript" src="{{url_for('static', filename='socket.js')}}"></script>
 
-    <div class="card" id="chat3" style="border-radius: 15px;">
-        <div class="card-body">
-            <div>
-                <div class="pt-3 pe-3" data-mdb-perfect-scrollbar="true">
-                    <div id = "chats">
-                        {% for message in messages %}
+    <div class="">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="pt-3 pe-3 chat-container" data-mdb-perfect-scrollbar="true">
+                <div class="chat">
+                    {% for message in messages %}
 {#                          Messages sent from user                            #}
-                            {% if message.sender_id == current_user.id %}
-                                <div class="d-flex flex-row justify-content-start">
-        {#                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"#}
-        {#                                alt="avatar 1" style="width: 45px; height: 100%;">#}
-                                    <div>
-                                        <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">{{message.content}}</p>
-                                        <p class="small ms-3 mb-3 rounded-3 text-muted float-end">{{message.sentAt}}</p>
-                                    </div>
+                        {% if message.sender_id == current_user.id %}
+                            <div class="d-flex flex-row justify-content-start">
+    {#                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"#}
+    {#                                alt="avatar 1" style="width: 45px; height: 100%;">#}
+                                <div>
+                                    <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">{{message.content}}</p>
+                                    <p class="small ms-3 mb-3 rounded-3 text-muted float-end">{{message.sentAt}}</p>
                                 </div>
+                            </div>
 
-                            {% else %}
+                        {% else %}
 {#                              Messages sent from contact to user#}
-                                <div class="d-flex flex-row justify-content-end">
-                                    <div>
-                                        <p class="small p-2 me-3 mb-1 rounded-3" style="background-color: blue;">{{message.content}}</p>
-                                        <p class="small me-3 mb-3 rounded-3 text-muted float-end">{{message.sentAt}}</p>
-                                    </div>
-        {#                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"#}
-        {#                                alt="avatar 1" style="width: 45px; height: 100%;">#}
+                            <div class="d-flex flex-row justify-content-end">
+                                <div>
+                                    <p class="small p-2 me-3 mb-1 rounded-3" style="background-color: blue;">{{message.content}}</p>
+                                    <p class="small me-3 mb-3 rounded-3 text-muted float-end">{{message.sentAt}}</p>
                                 </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+    {#                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"#}
+    {#                                alt="avatar 1" style="width: 45px; height: 100%;">#}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
 
-                    <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp" alt="avatar 3"
-                            style="width: 40px; height: 100%;">
-                        <input type="text" class="form-control form-control-lg" id = "message" autofocus placeholder="Type message">
-                        <button class="ms-3 btn btn-success" id = "sendmsg">Send</button>
-                    </div>
+                <div class="text-muted d-flex justify-content-start align-items-center message-sender">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp" alt="avatar 3"
+                        style="width: 40px; height: 100%;">
+                    <input type="text" class="form-control form-control-lg" id = "message" autofocus placeholder="Type message">
+                    <button class="ms-3 btn btn-success" id = "sendmsg">Send</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
     </div>
 
     
