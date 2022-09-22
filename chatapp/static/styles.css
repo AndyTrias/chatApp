@@ -1,20 +1,114 @@
-#chat3 .form-control {
-    border-color: transparent;
-}
-    
-#chat3 .form-control:focus {
-    border-color: transparent;
-    box-shadow: inset 0px 0px 0px 1px transparent;
+.list-group {
+    /* make a glass effect */
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 400px;
+    height: 400px;
+    padding: 40px;
 }
 
-.badge-dot {
-    border-radius: 50%; 
-    height: 10px;
+.lista {
+    margin-top: 10px;
+    border-radius: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    padding: 10px;
+}
+
+
+.lista:hover {
+    border-radius: 10px;
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.ml-2 {
+    margin-left: 10px;
+}
+
+.form-control,
+.input-group-text {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.input-group-text {
+    cursor: pointer;
+}
+
+.input-group:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.bg {
+    animation: slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+    bottom: 0;
+    left: -50%;
+    opacity: .5;
+    position: fixed;
+    right: -50%;
+    top: 0;
+    z-index: -1;
+}
+
+.bg2 {
+    animation-direction: alternate-reverse;
+    animation-duration: 4s;
+}
+
+.bg3 {
+    animation-duration: 5s;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(25%);
+    }
+}
+
+#mySidenav a {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0px;
+    transition: 0.3s;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    border-radius: 0 5px 5px 0;
     width: 10px;
-    margin-left: 2.9rem;
-    margin-top: -.75rem;
+    overflow: hidden;
+    /* make the text go in one line */
+    white-space: nowrap;
 }
 
-body {
-    background-color: #CDC4F9;
+#mySidenav {
+    margin-top: 55px;
+}
+
+#mySidenav a:hover {
+    width: 100px;
+}
+
+#add {
+    background-color: #2196F3;
+    opacity: 0.8;
+}
+
+
+#delete {
+    background-color: #f44336;
+    opacity: 0.8;
 }

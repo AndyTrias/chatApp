@@ -14,28 +14,17 @@
 
     
     <script src="https://kit.fontawesome.com/e2a2fac99f.js" crossorigin="anonymous"></script>
-    <link src="../static/styles.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet">
 
    <title> {% block title %}{% endblock %}</title>
 </head>
 
-<body class="bg-info">
-    <nav class="navbar navbar-expand navbar-light" style = "background-color: #e3f2fd;">
+<body>
+    <nav class="navbar navbar-expand navbar-light">
             <div class = "container-fluid">
                 <a href="/" class="btn btn-primary" style="margin-right:25px;"><i class="fa-solid fa-house"></i></a>
                 {# Different navbar based if user is logged in #}
-                {% if current_user.is_authenticated  %}
-                
-
-                <ul class = "navbar-nav me-auto">
-                    <li class = "nav-item dropdown">
-                        <a class="btn btn-primary dropdown-toggle" href =  "#" role = "button" id = "ContactMenu" data-bs-toggle="dropdown">Contacts</a>
-                        <ul aria-labelledby="ContactMenu" class="dropdown-menu dropdown-menu-end">
-                            <li> <a class = "dropdown-item" href ="/contacts"> Add Contact </a> </li>
-                            <li> <a class = "dropdown-item" href ="/delete"> Delete Contact </a> </li>
-                        </ul>
-                    </li>
-                </ul>
+                {% if current_user.is_authenticated  %} 
 
                 <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
