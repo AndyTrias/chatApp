@@ -21,14 +21,23 @@ def chat():
 
     if contact:
         # Tried to replicate the following sql query
-        # SELECT content FROM message WHERE
-        # sender_id = current_user.id OR id =
-        # (SELECT message_id FROM message_recipient WHERE receiver_id = current_user.id)
 
-        messages = Message.query.filter((Message.sender_id == current_user.id))
-        received = map(lambda msg: msg.message_id, MessageRecipient.query.filter_by(receiver_id=current_user.id).all())
-        for msg_id in received:
-            messages = messages.union(Message.query.filter_by(id=msg_id))
+        # Get messages sent from user to contact
+        # SELECT content
+        # FROM message WHERE sender_id = current_user.id and
+        # id IN(SELECT message_id FROM message_recipient WHERE receiver_id = contact.id);
+
+        # Get messages sent from contact to user
+        # SELECT content
+        # FROM message WHERE sender_id = contact.id and
+        # id IN(SELECT message_id FROM message_recipient WHERE receiver_id = current_user.id);
+
+        messages = Message.query.filter((Message.sender_id == current_user.id) &
+                                        (Message.message_recipient.has(MessageRecipient.receiver_id == contact.id)))
+
+        messages = messages.union(Message.query.filter((Message.sender_id == contact.id) &
+                                                       (Message.message_recipient.has(
+                                                        MessageRecipient.receiver_id == current_user.id))))
 
         # Send to client contact, user and messages
         return render_template('chat.html', contact=contact, user=current_user, messages=messages)
