@@ -1,21 +1,23 @@
 let socket = io();
 
-socket.on('connect', function() {
+socket.on('connect', function () {
     console.log('Connected to server');
 });
 
 
-document.addEventListener("DOMContentLoaded", function (){
+document.addEventListener("DOMContentLoaded", function () {
     let input = document.querySelector("#message");
 
-    document.querySelector("#sendmsg").addEventListener("click", function(){
+    document.querySelector("#sendmsg").addEventListener("click", function () {
         addMessage(input.value, "start");
 
 
-       // Clear input and send message
+        // Clear input and send message
         // Send contact to server to upload to database
-        let data  = { "message": input.value,
-                      "receiver": myContact};
+        let data = {
+            "message": input.value,
+            "receiver": myContact
+        };
 
         socket.emit("chatMessage", data);
         input.value = ""
@@ -29,19 +31,18 @@ document.addEventListener("DOMContentLoaded", function (){
 
 // Abstraction to avoid coid repetition
 function addMessage(msg, position) {
-        let mainDiv = document.querySelector(".chat");
+    let mainDiv = document.querySelector(".chat");
 
-        // First Div
-        let d = document.createElement("div");
-        d.className = `d-flex flex-row justify-content-${position}`;
+    // First Div
+    let d = document.createElement("div");
+    d.className = `d-flex flex-row justify-content-${position}`;
 
-        // Paragraph
-        let p = document.createElement("p");
-        p.innerHTML = msg;
-        p.className = "small p-2 ms-3 mb-1 rounded-3"
-        p.style.backgroundColor = "#f5f6f7"
+    // Paragraph
+    let p = document.createElement("p");
+    p.innerHTML = msg;
+    p.className = "small p-2 ms-3 mb-1 rounded-3 message-content"
 
-        // Append
-        d.appendChild(p);
-        mainDiv.appendChild(d);
-    }
+    // Append
+    d.appendChild(p);
+    mainDiv.appendChild(d);
+}

@@ -8,13 +8,16 @@
 
     <script type="text/javascript" src="{{url_for('static', filename='phones.js')}}"></script>
 
-    <form method = "post" class = "" style = "background-color: #e3f2fd;">
+    <div class="d-flex justify-content-center align-items-center">
+
+    <form method = "post" class = "phone" >
         <div class="mb-4">
             <input class = "form-control mx-auto w-auto" type = "tel"  placeholder = "Phone number" name = "phone" id = "phone"
              pattern="[0-9]{8,13}" required>
             <div class = "form-text">We will never share your phone to anyone</div>
+            
         </div>
-
-        {% block form %}{% endblock %}
+            {% block form %}{% endblock %}
     </form>
+</div>
 {% endblock %}
