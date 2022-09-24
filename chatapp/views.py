@@ -6,12 +6,15 @@ from chatapp.helpers import send_message, add_user, add_contact, get_user, delet
 views = Blueprint("views", __name__)
 
 
-# Login required redirects to register
+# Login required redirects to startPage
 @views.route("/")
 @login_required
 def index():
     return render_template("index.html", user=current_user)
 
+@views.route("/start")
+def startPage():
+    return render_template("startPage.html")
 
 @views.route("/chat", methods=["GET", "POST"])
 @login_required
@@ -33,11 +36,12 @@ def chat():
         # id IN(SELECT message_id FROM message_recipient WHERE receiver_id = current_user.id);
 
         messages = Message.query.filter((Message.sender_id == current_user.id) &
-                                        (Message.message_recipient.has(MessageRecipient.receiver_id == contact.id)))
+                                        (Message.message_recipient.has(
+                                            MessageRecipient.receiver_id == contact.contact_id)))
 
-        messages = messages.union(Message.query.filter((Message.sender_id == contact.id) &
+        messages = messages.union(Message.query.filter((Message.sender_id == contact.contact_id) &
                                                        (Message.message_recipient.has(
-                                                        MessageRecipient.receiver_id == current_user.id))))
+                                                           MessageRecipient.receiver_id == current_user.id))))
 
         # Send to client contact, user and messages
         return render_template('chat.html', contact=contact, user=current_user, messages=messages)
@@ -158,4 +162,4 @@ def verify():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("views.log"))
+    return redirect(url_for("views.startPage"))

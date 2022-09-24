@@ -243,7 +243,7 @@
     width: fit-content;
 }
 
-.phone div input:hover {
+.phone div input:hover, .start {
     transform: scale(1.1);
     transition: all 0.3s ease-in-out;
 }
@@ -312,4 +312,33 @@
 .logo{
     width: 100px;
     height: 100px;
+}
+
+.start-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 10px;
+    margin: 10px;
+    width: fit-content;
+}
+
+.start{
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 10px;
+    margin: 10px;
+    width: fit-content;
+}
+
+.start:hover{
+    transform: scale(1.4);
+    transition: all 0.3s ease-in-out;
 }
