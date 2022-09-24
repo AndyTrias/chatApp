@@ -17,7 +17,7 @@ def index():
 @login_required
 def chat():
     contact_id = request.form.get("contact")
-    contact = Contact.query.get(contact_id)
+    contact = Contact.query.filter_by(id=contact_id, user_id=current_user.id).first()
 
     if contact:
         # Tried to replicate the following sql query
@@ -33,11 +33,15 @@ def chat():
         # id IN(SELECT message_id FROM message_recipient WHERE receiver_id = current_user.id);
 
         messages = Message.query.filter((Message.sender_id == current_user.id) &
-                                        (Message.message_recipient.has(MessageRecipient.receiver_id == contact.id)))
+                                        (Message.message_recipient.has(
+                                            MessageRecipient.receiver_id == contact.contact_id)))
+        print(current_user.id, contact.id)
+        for msg in messages:
+            print(msg.content)
 
-        messages = messages.union(Message.query.filter((Message.sender_id == contact.id) &
+        messages = messages.union(Message.query.filter((Message.sender_id == contact.contact_id) &
                                                        (Message.message_recipient.has(
-                                                        MessageRecipient.receiver_id == current_user.id))))
+                                                           MessageRecipient.receiver_id == current_user.id))))
 
         # Send to client contact, user and messages
         return render_template('chat.html', contact=contact, user=current_user, messages=messages)
