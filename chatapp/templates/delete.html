@@ -3,17 +3,38 @@
 {% block title %} Delete {% endblock %}
 
 {% block main %}
+
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
     <form method="post">
         <div class="mb-3">
-            <select class="form-select mx-auto w-auto" name="contact">
+            <!-- <select class="form-select mx-auto w-auto" name="contact">
                 <option disabled selected>Contacts</option>
                 {% for contact in contacts %}
                     <option value ="{{ contact.id }}">{{ contact.name }}</option>
 
                 {% endfor %}
-            </select>
-        </div>
+            </select> -->
 
-        <button class="btn btn-danger" type="submit">Delete</button>
+            <div class="container d-flex justify-content-center">
+                <ul class="list-group mt-5 text-black">
+                  {% for contact in contacts %}
+                  <li class="lista d-flex justify-content-between align-content-center delete-item">
+                    <div class="d-flex flex-row">
+                      <img src="../static/images/default.png" width="40" />
+                      <div class="ml-2 d-flex align-items-center">
+                        <form method="post">
+                          <input type="hidden" name="contact" value="{{contact.id}}">
+                          <button type="submit" class="btn text-dark">{{contact.name}}</button>
+                        </form>
+                      </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+                </div>
+        </div>
     </form>
 {% endblock %}
