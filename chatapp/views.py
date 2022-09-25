@@ -35,9 +35,6 @@ def chat():
         messages = Message.query.filter((Message.sender_id == current_user.id) &
                                         (Message.message_recipient.has(
                                             MessageRecipient.receiver_id == contact.contact_id)))
-        print(current_user.id, contact.id)
-        for msg in messages:
-            print(msg.content)
 
         messages = messages.union(Message.query.filter((Message.sender_id == contact.contact_id) &
                                                        (Message.message_recipient.has(
