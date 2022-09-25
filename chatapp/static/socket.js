@@ -68,4 +68,3 @@ function addMessage(msg, position) {
 
     mainDiv.appendChild(d)
 
-}

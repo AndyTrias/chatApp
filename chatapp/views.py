@@ -20,7 +20,7 @@ def startPage():
 @login_required
 def chat():
     contact_id = request.form.get("contact")
-    contact = Contact.query.get(contact_id)
+    contact = Contact.query.filter_by(id=contact_id, user_id=current_user.id).first()
 
     if contact:
         # Tried to replicate the following sql query

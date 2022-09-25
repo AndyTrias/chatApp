@@ -12,10 +12,10 @@
 {#                          Messages sent from user                            #}
                         {% if message.sender_id == current_user.id %}
                             <div class="d-flex flex-row justify-content-start">
-                               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;">
                                 <div class="message-container">
-                                    <p class="small p-2 ms-3 mb-1 rounded-3 message-content">{{message.content}}</p>
-                                    <p class="small ms-3 mb-3 rounded-3 text-muted float-end">{{message.sentAt}}</p>
+                                <p class="small p-2 ms-3 mb-1 rounded-3 message-content">{{message.content}}</p>
+                                <p class="small ms-3 mb-3 rounded-3 text-muted float-end">{{message.sentAt}}</p>
                                 </div>
                             </div>
 
@@ -23,7 +23,7 @@
 {#                              Messages sent from contact to user#}
                             <div class="d-flex flex-row justify-content-end">
                                 <div class="received">
-                                    <p class="small  rounded-3 content">{{message.content}}</p>
+                                    <p class="small rounded-3 content">{{message.content}}</p>
                                     <p class="small me-3 mb-3 rounded-3 text-muted float-end">{{message.sentAt}}</p>
                                 </div>
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;">
