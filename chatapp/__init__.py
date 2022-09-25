@@ -28,7 +28,7 @@ def create_app(debug=True):
 
     # Set default view
     login_manager.init_app(app)
-    login_manager.login_view = "views.register"
+    login_manager.login_view = "views.startPage"
     login_manager.login_message = ""
 
     sess.init_app(app)
