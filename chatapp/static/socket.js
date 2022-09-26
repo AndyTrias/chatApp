@@ -4,13 +4,11 @@ socket.on('connect', function () {
     console.log('Connected to server');
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
     let input = document.querySelector("#message");
 
     document.querySelector("#sendmsg").addEventListener("click", function () {
         addMessage(input.value, "start");
-
 
         // Clear input and send message
         // Send contact to server to upload to database
@@ -67,4 +65,4 @@ function addMessage(msg, position) {
         d.innerHTML += `<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;">`;
 
     mainDiv.appendChild(d)
-
+}

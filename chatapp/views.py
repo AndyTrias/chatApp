@@ -1,7 +1,7 @@
 from flask import Blueprint, flash, render_template, redirect, request, session, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 from chatapp.models import User, Contact, Message, MessageRecipient
-from chatapp.helpers import send_message, add_user, add_contact, get_user, delete_user
+from chatapp.helpers import send_message, get_user, delete_user
 
 views = Blueprint("views", __name__)
 
@@ -12,9 +12,11 @@ views = Blueprint("views", __name__)
 def index():
     return render_template("index.html", user=current_user)
 
+
 @views.route("/start")
-def startPage():
+def start_page():
     return render_template("startPage.html")
+
 
 @views.route("/chat", methods=["GET", "POST"])
 @login_required
@@ -65,8 +67,8 @@ def add_contacts():
                 flash("User is already a contact", "error")
 
             else:
-                add_contact(user=current_user.id, phone=phone, contact_name=name)
-
+                # add_contact(user=current_user.id, phone=phone, contact_name=name)
+                Contact.create(user_id=current_user.id, contact_id=contact_user.id, name=name)
         else:
             flash("No user found with this phone", "error")
 
@@ -122,7 +124,8 @@ def register():
         # Add user to database once message has been sent
         # Store id in sessions to avoid wrong redirections to verify
         if send_message(phone):
-            user = add_user(name=name, phone=phone)
+            # user = add_user(name=name, phone=phone)
+            user = User.create(name=name, phone=phone)
             session["id"] = user.id
             return redirect(url_for("views.verify"))
 
@@ -162,4 +165,4 @@ def verify():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("views.startPage"))
+    return redirect(url_for("views.start_page"))

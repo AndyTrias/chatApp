@@ -1,6 +1,6 @@
-Flask
-Flask_Session
-Flask_Login
-Flask_sqlalchemy
-FLask_socketio
-Twilio
+Flask~=2.0.2
+Flask_Session~=0.4.0
+Flask_Login~=0.5.0
+Flask_sqlalchemy~=2.5.1
+FLask_socketio~=5.1.1
+Twilio~=7.7.1
