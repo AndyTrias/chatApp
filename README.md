@@ -35,6 +35,10 @@ pip install -r requirements.txt
 ```TWILIO_ACCOUNT_SID```, ```TWILIO_AUTH_TOKEN``` and  ```TWILIO_PHONE_NUMBER``` as an [environmental variable](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html)
 - All of them can be found in your [Twilio settings](https://console.twilio.com/?frameUrl=/console)
 
+6. Run the server
+```
+python app.py
+```
 
 # Description
 As said, the project uses an MVC arhitecture pattern
