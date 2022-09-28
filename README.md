@@ -7,8 +7,6 @@ The project uses an SMS Authentication with Twilio
 It was a made as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/)
 
 
-
-
 # Setup 
 
 1. Create a [Twilio](https://www.twilio.com/es-mx/) account<br/>
@@ -47,4 +45,33 @@ For the data model, 4 entities are used
 - ```User``` Whose phone is used for authentication and a name is stored as well.
 - ```Contact``` Each user can have multiple contacts
 - ```Message``` To store content, time and a sender(User) 
-- ```MessageRecipient``` To hold the map between message and recipient since the recipient is also a User
+- ```MessageRecipient``` To hold the map between message and recipient since the recipien is also a User
+
+In addition, there is a baseClass used for polymorphism to create a register in each table
+
+## Views
+On the one hand, for the authentication part, there are register, log and verify as well as a startPage to used for redirection. On the other hand, for the chatApp there are add, delete, index and chat
+
+### Authentication
+Both register and log have the task to either create a new ```User``` or verify if there is already a ```User``` in the Database using only phone as input. After that, a message is sent to the user's phone which will have to authenticate in verify
+
+### Main
+- Delete contact shows a dropdown list in where each element is a form containing the ```contact_id``` as a hidden value to actually delete them form the database
+
+- Add contact only check that the user exists and is not already a contact
+
+- Index shows a dropdown list with all the contact similarly to delete in the way that both of them have a form with the ```contact_id``` as a hidden value wich is then used to redirect to chat
+
+- Chat queries the database looking for all messages associated between user and his contact and sends it to the client 
+
+## Events
+Uses Flask-socketIO for bidirectional and communication between client and server<br/> 
+
+Each time the user sends a message by pressing a button, a socket is sent from JS to the server without having to restart the page
+
+In Flask, the message is uploaded to the database and sent to the receiver client using sockets.
+
+## Helpers
+- Only used to send message with Twilio
+
+
