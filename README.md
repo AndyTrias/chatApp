@@ -4,10 +4,12 @@ ChatApp is a simple chat application that allows users to communicate in real-ti
 
 The project uses an SMS Authentication with Twilio
 
+It was a made as a final project for [CS50’s Introduction to Computer Science](https://cs50.harvard.edu/)
 
 
 
-## Setup 
+
+# Setup 
 
 1. Create a [Twilio](https://www.twilio.com/es-mx/) account<br/>
 
@@ -34,3 +36,15 @@ pip install -r requirements.txt
 - To allow SMS verification, you will need to configure your
 ```TWILIO_ACCOUNT_SID```, ```TWILIO_AUTH_TOKEN``` and  ```TWILIO_PHONE_NUMBER``` as an [environmental variable](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html)
 - All of them can be found in your [Twilio settings](https://console.twilio.com/?frameUrl=/console)
+
+
+# Description
+As said, the project uses an MVC arhitecture pattern
+
+## Models
+For the data model, 4 entities are used
+
+- ```User``` Whose phone is used for authentication and a name is stored as well.
+- ```Contact``` Each user can have multiple contacts
+- ```Message``` To store content, time and a sender(User) 
+- ```MessageRecipient``` To hold the map between message and recipient since the recipient is also a User
