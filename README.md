@@ -45,6 +45,7 @@ As said, the project uses an MVC arhitecture pattern
 
 ## Models
 For the data model, 4 entities are used
+![Entities](https://i.ibb.co/S3p8w1F/Captura-de-pantalla-2022-09-28-204939.png)
 
 - ```User``` Whose phone is used for authentication and a name is stored as well.
 - ```Contact``` Each user can have multiple contacts
